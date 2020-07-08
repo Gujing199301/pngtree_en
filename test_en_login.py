@@ -107,56 +107,104 @@ class TestEnLogin(unittest.TestCase):
         self.driver.find_element_by_xpath(
             '//*[@id="wrapper"]/div[5]/div/div[1]/div[2]/div[5]/div/div[4]/a[5]/i').click()
 
-    # # google登录
-    # @pytest.mark.run(order=5)
-    # def test_en_google(self):
+    # # # google登录
+    # # @pytest.mark.run(order=5)
+    # # def test_en_google(self):
+    # #
+    # #     # 点击谷歌登录
+    # #     self.driver.find_element_by_xpath('//*[@id="base-public-login"]/div[2]/div/div/div/div[1]/div/a[1]').click()
+    # #
+    # #     # 新打开一个窗口（弹窗）,切换至第2个窗口
+    # #     f = self.driver.window_handles
+    # #     self.driver.switch_to.window(f[1])
+    # #
+    # #     # 窗口最大化
+    # #     self.driver.maximize_window()
+    # #
+    # #     # 填写谷歌账号
+    # #     self.driver.find_element_by_id('identifierId').send_keys('gujingqwertyuiop@gmail.com')
+    # #     sleep(1)
+    # #
+    # #     # 点击下一步
+    # #     self.driver.find_element_by_xpath(
+    # #         '//*[@id="identifierNext"]/span'
+    # #         ).click()
+    # #     sleep(3)
+    # #
+    # #
+    # #     # 填写谷歌密码
+    # #     self.driver.find_element_by_xpath('//*[@id="password"]/div[1]/div/div[1]/input').send_keys('gujing199301')
+    # #     sleep(3)
+    # #
+    # #     # 点击下一步
+    # #     # self.driver.find_element_by_css_selector('#passwordNext > span > span').click()
+    # #     self.driver.find_element_by_xpath('//*[@id="passwordNext"]/span').click()
+    # #
+    # #     sleep(3)
+    # #
+    # #     # 谷歌登录窗口自行关闭，切换至原来窗口（登录首页）
+    # #     f = self.driver.window_handles
+    # #
+    # #     self.driver.switch_to.window(f[0])
+    # #
+    # #
+    # #     print('英语谷歌登录成功')
     #
-    #     # 点击谷歌登录
-    #     self.driver.find_element_by_xpath('//*[@id="base-public-login"]/div[2]/div/div/div/div[1]/div/a[1]').click()
+    # #     # 刷新页面，可能有优惠券遮罩
+    # #     self.driver.refresh()
+    # #
+    # #     sleep(3)
+    # #
+    # #     # 定位用户头像（邮箱登录头像和其他登录方式xpath略有不同）
+    # #     user_img = self.driver.find_element_by_xpath('//*[@id="wrapper"]/div[5]/div/div[1]/div[2]/div[5]/a[1]/div/img')
+    # #
+    # #     # 创建鼠标对象
+    # #     action = ActionChains(self.driver)
+    # #
+    # #     action.move_to_element(user_img).perform()
+    # #     sleep(3)
+    # #
+    # #     # 点击退出账号
+    # #     self.driver.find_element_by_xpath(
+    # #             '//*[@id="wrapper"]/div[4]/div/div[1]/div[2]/div[5]/div/div[4]/a[5]/i').click()
+    #
+    #
+    # # facebook登录
+    # @pytest.mark.run(order=6)
+    # def test_en_facebook(self):
+    #
+    #     # 点击facebook登录
+    #     self.driver.find_element_by_xpath('//*[@id="base-public-login"]/div[2]/div/div/div/div[1]/div/a[2]/i').click()
     #
     #     # 新打开一个窗口（弹窗）,切换至第2个窗口
     #     f = self.driver.window_handles
     #     self.driver.switch_to.window(f[1])
     #
-    #     # 窗口最大化
-    #     self.driver.maximize_window()
+    #     # 填写fecebool账号
+    #     self.driver.find_element_by_xpath('//*[@id="email"]').send_keys('2505312014@qq.com')
+    #     # 输入facebook密码
+    #     self.driver.find_element_by_xpath('//*[@id="pass"]').send_keys('pngtree2019')
     #
-    #     # 填写谷歌账号
-    #     self.driver.find_element_by_id('identifierId').send_keys('gujingqwertyuiop@gmail.com')
-    #     sleep(1)
-    #
-    #     # 点击下一步
-    #     self.driver.find_element_by_xpath(
-    #         '//*[@id="identifierNext"]/span'
-    #         ).click()
-    #     sleep(3)
-    #
-    #
-    #     # 填写谷歌密码
-    #     self.driver.find_element_by_xpath('//*[@id="password"]/div[1]/div/div[1]/input').send_keys('gujing199301')
-    #     sleep(3)
-    #
-    #     # 点击下一步
-    #     # self.driver.find_element_by_css_selector('#passwordNext > span > span').click()
-    #     self.driver.find_element_by_xpath('//*[@id="passwordNext"]/span').click()
+    #     # 点击登录按钮
+    #     self.driver.find_element_by_xpath('//*[@id="loginbutton"]').click()
     #
     #     sleep(3)
     #
-    #     # 谷歌登录窗口自行关闭，切换至原来窗口（登录首页）
+    #     # facebook登录窗口自行关闭，切换至原来窗口（登录首页）
     #     f = self.driver.window_handles
     #
     #     self.driver.switch_to.window(f[0])
     #
+    #     print('英语facebook登录成功')
     #
-    #     print('英语谷歌登录成功')
-
     #     # 刷新页面，可能有优惠券遮罩
     #     self.driver.refresh()
     #
     #     sleep(3)
     #
     #     # 定位用户头像（邮箱登录头像和其他登录方式xpath略有不同）
-    #     user_img = self.driver.find_element_by_xpath('//*[@id="wrapper"]/div[5]/div/div[1]/div[2]/div[5]/a[1]/div/img')
+    #     user_img = self.driver.find_element_by_xpath(
+    #         '//*[@id="wrapper"]/div[5]/div/div[1]/div[2]/div[5]/a[1]/div/img')
     #
     #     # 创建鼠标对象
     #     action = ActionChains(self.driver)
@@ -166,124 +214,76 @@ class TestEnLogin(unittest.TestCase):
     #
     #     # 点击退出账号
     #     self.driver.find_element_by_xpath(
-    #             '//*[@id="wrapper"]/div[4]/div/div[1]/div[2]/div[5]/div/div[4]/a[5]/i').click()
-
-
-    # facebook登录
-    @pytest.mark.run(order=6)
-    def test_en_facebook(self):
-
-        # 点击facebook登录
-        self.driver.find_element_by_xpath('//*[@id="base-public-login"]/div[2]/div/div/div/div[1]/div/a[2]/i').click()
-
-        # 新打开一个窗口（弹窗）,切换至第2个窗口
-        f = self.driver.window_handles
-        self.driver.switch_to.window(f[1])
-
-        # 填写fecebool账号
-        self.driver.find_element_by_xpath('//*[@id="email"]').send_keys('2505312014@qq.com')
-        # 输入facebook密码
-        self.driver.find_element_by_xpath('//*[@id="pass"]').send_keys('pngtree2019')
-
-        # 点击登录按钮
-        self.driver.find_element_by_xpath('//*[@id="loginbutton"]').click()
-
-        sleep(3)
-
-        # facebook登录窗口自行关闭，切换至原来窗口（登录首页）
-        f = self.driver.window_handles
-
-        self.driver.switch_to.window(f[0])
-
-        print('英语facebook登录成功')
-
-        # 刷新页面，可能有优惠券遮罩
-        self.driver.refresh()
-
-        sleep(3)
-
-        # 定位用户头像（邮箱登录头像和其他登录方式xpath略有不同）
-        user_img = self.driver.find_element_by_xpath(
-            '//*[@id="wrapper"]/div[5]/div/div[1]/div[2]/div[5]/a[1]/div/img')
-
-        # 创建鼠标对象
-        action = ActionChains(self.driver)
-
-        action.move_to_element(user_img).perform()
-        sleep(3)
-
-        # 点击退出账号
-        self.driver.find_element_by_xpath(
-            '//*[@id="wrapper"]/div[5]/div/div[1]/div[2]/div[5]/div/div[4]/a[5]/i').click()
-
-    # twitter登录
-    @pytest.mark.run(order=7)
-    def test_en_twitter(self):
-        # 点击twitter登录
-        self.driver.find_element_by_xpath('//*[@id="base-public-login"]/div[2]/div/div/div/div[1]/div/a[3]/i').click()
-        sleep(1)
-
-        # 新打开一个窗口（弹窗）,切换至第2个窗口
-        f = self.driver.window_handles
-        self.driver.switch_to.window(f[1])
-
-        # 填写twitter账号
-        self.driver.find_element_by_xpath('//*[@id="username_or_email"]').send_keys('1280365716@qq.com')
-
-        # 输入twitter密码
-        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys('gujing199301')
-
-        # 点击登录按钮
-        self.driver.find_element_by_xpath('//*[@id="allow"]').click()
-
-        sleep(2)
-
-        # 不确定是否出现手机号验证
-        try:
-            ifram_twitter_phone = self.driver.find_element_by_id('login-challenge-form')
-            self.driver.switch_to.frame(ifram_twitter_phone)
-
-            sleep(2)
-
-            # 输入手机号
-            self.driver.find_element_by_id('challenge_response').send_keys('18703816548')
-            # 点击提交按钮
-            self.driver.find_element_by_id('email_challenge_submit').click()
-
-            sleep(3)
-
-            # 切出iframe
-            self.driver.switch_to.parent_frame()
-
-
-        except:
-            print('未出现手机号验证')
-
-        # twitter登录窗口自行关闭，切换至原来窗口（登录首页）
-        f = self.driver.window_handles
-
-        self.driver.switch_to.window(f[0])
-
-        # 刷新页面，可能有优惠券遮罩
-        self.driver.refresh()
-
-        sleep(3)
-
-        # 定位用户头像（邮箱登录头像和其他登录方式xpath略有不同）
-        user_img = self.driver.find_element_by_xpath(
-            '//*[@id="wrapper"]/div[5]/div/div[1]/div[2]/div[5]/a[1]/div/img')
-
-        # 创建鼠标对象
-        action = ActionChains(self.driver)
-
-        action.move_to_element(user_img).perform()
-        sleep(3)
-
-        print('英语twitter登录成功')
-
-        # 点击退出账号
-        self.driver.find_element_by_xpath(
-            '//*[@id="wrapper"]/div[5]/div/div[1]/div[2]/div[5]/div/div[4]/a[5]/i').click()
+    #         '//*[@id="wrapper"]/div[5]/div/div[1]/div[2]/div[5]/div/div[4]/a[5]/i').click()
+    #
+    # # twitter登录
+    # @pytest.mark.run(order=7)
+    # def test_en_twitter(self):
+    #     # 点击twitter登录
+    #     self.driver.find_element_by_xpath('//*[@id="base-public-login"]/div[2]/div/div/div/div[1]/div/a[3]/i').click()
+    #     sleep(1)
+    #
+    #     # 新打开一个窗口（弹窗）,切换至第2个窗口
+    #     f = self.driver.window_handles
+    #     self.driver.switch_to.window(f[1])
+    #
+    #     # 填写twitter账号
+    #     self.driver.find_element_by_xpath('//*[@id="username_or_email"]').send_keys('1280365716@qq.com')
+    #
+    #     # 输入twitter密码
+    #     self.driver.find_element_by_xpath('//*[@id="password"]').send_keys('gujing199301')
+    #
+    #     # 点击登录按钮
+    #     self.driver.find_element_by_xpath('//*[@id="allow"]').click()
+    #
+    #     sleep(2)
+    #
+    #     # 不确定是否出现手机号验证
+    #     try:
+    #         ifram_twitter_phone = self.driver.find_element_by_id('login-challenge-form')
+    #         self.driver.switch_to.frame(ifram_twitter_phone)
+    #
+    #         sleep(2)
+    #
+    #         # 输入手机号
+    #         self.driver.find_element_by_id('challenge_response').send_keys('18703816548')
+    #         # 点击提交按钮
+    #         self.driver.find_element_by_id('email_challenge_submit').click()
+    #
+    #         sleep(3)
+    #
+    #         # 切出iframe
+    #         self.driver.switch_to.parent_frame()
+    #
+    #
+    #     except:
+    #         print('未出现手机号验证')
+    #
+    #     # twitter登录窗口自行关闭，切换至原来窗口（登录首页）
+    #     f = self.driver.window_handles
+    #
+    #     self.driver.switch_to.window(f[0])
+    #
+    #     # 刷新页面，可能有优惠券遮罩
+    #     self.driver.refresh()
+    #
+    #     sleep(3)
+    #
+    #     # 定位用户头像（邮箱登录头像和其他登录方式xpath略有不同）
+    #     user_img = self.driver.find_element_by_xpath(
+    #         '//*[@id="wrapper"]/div[5]/div/div[1]/div[2]/div[5]/a[1]/div/img')
+    #
+    #     # 创建鼠标对象
+    #     action = ActionChains(self.driver)
+    #
+    #     action.move_to_element(user_img).perform()
+    #     sleep(3)
+    #
+    #     print('英语twitter登录成功')
+    #
+    #     # 点击退出账号
+    #     self.driver.find_element_by_xpath(
+    #         '//*[@id="wrapper"]/div[5]/div/div[1]/div[2]/div[5]/div/div[4]/a[5]/i').click()
 
     def tearDown(self):
 
