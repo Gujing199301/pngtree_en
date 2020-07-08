@@ -310,7 +310,7 @@ class TestEnLogin(unittest.TestCase):
 
     def teardown_class(self):
         sleep(2)
-        self.driver.quit()
+        self.driver.close()
 
 
 if __name__ == "__main__":
