@@ -12,7 +12,7 @@ class TestAdd:
     @allure.step(title = '充值功能')
     def test_02(self):
         print('充值成功')
-        assert False
+        assert True
 
 
 
