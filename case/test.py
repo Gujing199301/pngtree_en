@@ -15,5 +15,11 @@ class TestAdd(unittest.TestCase):
     def test_02(self):
         print('第二条测试用例')
 
-if __name__ == '__main__':
-    pytest.main(['-s','test.py'])
+    @allure.step(title = '充值功能')
+    def test_03(self):
+         print('第三天测试用例')
+
+
+if __name__ == "__main__":
+    pytest.main(['-s','-q','--alluredir report'])
+
