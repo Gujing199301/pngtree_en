@@ -187,42 +187,47 @@ class TestEnPay(unittest.TestCase):
         # 点击提交按钮
         self.driver.find_element_by_id('start-show-pay-box').click()
 
+
         # 充值过的用户有警告框提示
-        alert = self.driver.switch_to.alert
-        alert.accept()
-
-        sleep(2)
-
-        # 切换iframe
-        frame = self.driver.find_element_by_id('ifrm_creditcard_checkout')
-
-        self.driver.switch_to.frame(frame)
-
-        sleep(3)
-
-        # 输入卡号等信息
-        self.driver.find_element_by_id('card_number_temp').send_keys('4111119987834534')
-
-        self.driver.find_element_by_id('checkout_expiration_date').send_keys('02/24')
-
-        self.driver.find_element_by_id('cvv2').send_keys('789')
-
-        sleep(3)
-
         try:
-
-            # 点击付款按钮
-            self.driver.find_element_by_xpath('//*[@id="wrap_height"]/div/div[3]/div/div[4]/button[1]').click()
-
-            sleep(3)
-            print('钱海信用卡充值：3个月')
+            alert = self.driver.switch_to.alert
+            alert.accept()
+            sleep(1)
 
         except:
-            print('点击buy now出现异常，但流程依然正常完成')
-            print('钱海信用卡充值季套餐成功')
+            print('无需操作')
 
+        finally:
 
+            sleep(3)
 
+            # 切换iframe
+            frame = self.driver.find_element_by_id('ifrm_creditcard_checkout')
+
+            self.driver.switch_to.frame(frame)
+
+            sleep(3)
+
+            # 输入卡号等信息
+            self.driver.find_element_by_id('card_number_temp').send_keys('4111119987834534')
+
+            self.driver.find_element_by_id('checkout_expiration_date').send_keys('02/24')
+
+            self.driver.find_element_by_id('cvv2').send_keys('789')
+
+            sleep(3)
+
+            try:
+
+                # 点击付款按钮
+                self.driver.find_element_by_xpath('//*[@id="wrap_height"]/div/div[3]/div/div[4]/button[1]').click()
+
+                sleep(3)
+                print('钱海信用卡充值：3个月')
+
+            except:
+                print('点击buy now出现异常，但流程依然正常完成')
+                print('钱海信用卡充值季套餐成功')
 
     # 三方支付充值年套餐
     @pytest.mark.run(order=1)
@@ -300,37 +305,29 @@ class TestEnPay(unittest.TestCase):
 
         sleep(2)
 
+        self.driver.refresh()
+        sleep(3)
+
         # 点击paypal充值选择按钮
         self.driver.find_element_by_xpath('//*[@id="wrapper"]/div[3]/div/div[2]/div/div[2]/ul/li[2]/a/span').click()
 
-        sleep(2)
+        sleep(3)
 
         # 第一次切换frame
         frame_1 = self.driver.find_element_by_tag_name('iframe')
         self.driver.switch_to.frame(frame_1)
+        sleep(1)
 
         # 点击paypal支付图标
-        element_paypal_1 = WebDriverWait(self.driver, 10, 1). \
-            until(expected_conditions.presence_of_element_located(
-            (By.XPATH, '//*[@id="paypal-animation-content"]/div[1]/div[1]/div/img[2]')))
+        self.driver.find_element_by_xpath('//*[@id="paypal-animation-content"]/div[1]/div[1]/div/img[2]').click()
 
-
-        list_1 = []
-
-        list_1.append(element_paypal_1)
-
-        for element in list_1:
-            element.click()
-
-            continue
-
-        sleep(5)
+        sleep(3)
 
         # 充值过的用户有警告框提示
         alert = self.driver.switch_to.alert
         alert.accept()
 
-        sleep(2)
+        sleep(3)
 
         # 回到父级iframe
         self.driver.switch_to.parent_frame()
@@ -339,51 +336,65 @@ class TestEnPay(unittest.TestCase):
         f = self.driver.window_handles
         self.driver.switch_to.window(f[2])
 
-        sleep(3)
-
-        # 第二次切换iframe
-        iframe_2 = self.driver.find_element_by_name('injectedUl')
-        self.driver.switch_to.frame(iframe_2)
-
-        sleep(3)
-
-        # 输入邮箱508151729-g@qq.com，密码11111111
-        self.driver.find_element_by_xpath('//*[@id="email"]').send_keys('1165509917@qq.com')
-
-        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys('11111111')
-
-        # 点击登录
-        self.driver.find_element_by_xpath('//*[@id="btnLogin"]').click()
-
-        sleep(3)
-
-        # 切出iframe_2
-        self.driver.switch_to.parent_frame()
         sleep(2)
 
-        # # 点击第一个单选按钮,可以不执行代码，默认第一个
-        # self.driver.find_element_by_xpath(
-        #     '//*[@id="xoSelectFi"]/div[1]/div[1]/div[2]/div/div[1]/div/ul/li[1]/experience[2]/div/div/ng-transclude/div[1]/label')\
-        #     .click()
-        sleep(2)
+        try:
+            # 如果出现让登陆paypal账号
+            # 点击登录
+            self.driver.find_element_by_xpath('//*[@id="loginSection"]/div/div[2]/a').click()
+            sleep(1)
 
-        # 点击继续
-        self.driver.find_element_by_xpath('//*[@id="button"]/button').click()
+            # 输入账号
+            self.driver.find_element_by_xpath('//*[@id="email"]').send_keys('1165509917@qq.com')
+            sleep(2)
 
-        sleep(2)
+            # 输入下一步
+            self.driver.find_element_by_xpath('//*[@id="btnNext"]').click()
+            sleep(2)
+            # 输入密码
+            self.driver.find_element_by_xpath('//*[@id="password"]').send_keys('11111111')
+            sleep(1)
 
-        # 点击paynow
-        self.driver.find_element_by_id('confirmButtonTop').click()
-        sleep(10)
 
-        # 切换第2个窗口
-        f = self.driver.window_handles
+        except:
+            print('未出现paypal登录提示，照常进行')
+            # # 第二次切换iframe
+            # iframe_2 = self.driver.find_element_by_name('injectedUl')
+            # self.driver.switch_to.frame(iframe_2)
 
-        self.driver.switch_to.window(f[1])
+            # 输入邮箱1165509917@qq.com，密码11111111
+            self.driver.find_element_by_xpath('//*[@id="email"]').send_keys('1165509917@qq.com')
 
-        sleep(3)
+            self.driver.find_element_by_xpath('//*[@id="password"]').send_keys('11111111')
 
-        print('paypal充值：6个月')
+            sleep(1)
+
+            # # 切出iframe_2
+            # self.driver.switch_to.parent_frame()
+            # sleep(2)
+
+        finally:
+            # 点击登录
+            self.driver.find_element_by_xpath('//*[@id="btnLogin"]').click()
+            sleep(3)
+
+            # 点击继续
+            self.driver.find_element_by_xpath('//*[@id="button"]/button').click()
+
+            sleep(2)
+
+            # 点击paynow
+            self.driver.find_element_by_id('confirmButtonTop').click()
+            sleep(10)
+
+            # 切换第2个窗口
+            f = self.driver.window_handles
+
+            self.driver.switch_to.window(f[1])
+
+            sleep(3)
+
+            print('paypal充值：6个月')
 
 
     # paypal信用卡支付---终身
@@ -400,6 +411,9 @@ class TestEnPay(unittest.TestCase):
 
         sleep(2)
 
+        self.driver.refresh()
+        sleep(3)
+
         # 点击paypal选择按钮
         self.driver.find_element_by_xpath('//*[@id="wrapper"]/div[3]/div/div[2]/div/div[2]/ul/li[2]/a/span').click()
 
@@ -410,18 +424,11 @@ class TestEnPay(unittest.TestCase):
 
         self.driver.switch_to.frame(frame)
 
-        sleep(5)
+        sleep(2)
 
         # 点击paypal信用卡充值
-        element_paypal_2 = self.driver.find_element_by_xpath('//*[@id="paypal-animation-content"]/div[1]/div[2]/div[1]/img').click()
-
-        # list_2 = []
-        # list_2.append(element_paypal_2)
-        # for element in list_2:
-        #     element.click()
-        #     continue
-
-        # sleep(3)
+        self.driver.find_element_by_xpath('//*[@id="paypal-animation-content"]/div[1]/div[2]/div[1]/img').click()
+        sleep(3)
 
         # 充值过的用户有警告框提示
         alert = self.driver.switch_to.alert
@@ -436,7 +443,7 @@ class TestEnPay(unittest.TestCase):
 
         # 弹窗最大化
         self.driver.maximize_window()
-        sleep(2)
+        sleep(5)
 
         # 填写信息
         # 定位下拉框
@@ -444,14 +451,19 @@ class TestEnPay(unittest.TestCase):
 
         # 实例化下拉框，传参
         select_1 = Select(element_select_1)
+        sleep(1)
 
         # 获取下拉框的文本内容:获得的是字符串
         texts = element_select_1.text
+        sleep(2)
 
         if '美国' in texts:
 
             # 文本定位法，选择United States
             select_1.select_by_visible_text('美国')  # 如果默认中国，选择美国
+
+        elif 'United States' in texts:
+            select_1.select_by_visible_text('United States')
 
         else:
 
@@ -460,6 +472,8 @@ class TestEnPay(unittest.TestCase):
             sleep(6)
 
             select_1.select_by_visible_text('United States')  # 重新选择国家
+
+
 
         sleep(5)
 
@@ -566,8 +580,8 @@ class TestEnPay(unittest.TestCase):
         f = self.driver.window_handles
         self.driver.switch_to.window(f[0])
 
-
     def teardown_class(self):
+
         self.driver.quit()
 
 if __name__ == '__main__':
