@@ -1,25 +1,24 @@
 # 导包
 from time import sleep
 
+# noinspection PyUnresolvedReferences
 import time
 
 from selenium import webdriver
 
 import unittest
 
+# noinspection PyUnresolvedReferences
 from selenium.webdriver.common.by import By
 
-from selenium.webdriver.support import expected_conditions
-
+# noinspection PyUnresolvedReferences
 from selenium.webdriver.support.select import Select
-
-from selenium.webdriver.support.wait import WebDriverWait
 
 from selenium.webdriver.common.action_chains import ActionChains
 
-from selenium.webdriver.common.keys import Keys
-
 import pytest
+
+import allure
 
 
 class TestEnPay(unittest.TestCase):
@@ -81,7 +80,6 @@ class TestEnPay(unittest.TestCase):
 
         sleep(2)
 
-
     def setUp(self):
 
         # 新窗口打开测试权限
@@ -127,6 +125,7 @@ class TestEnPay(unittest.TestCase):
 
     # 钱海信用卡支付，充值季套餐
     @pytest.mark.run(order=0)
+    @allure.step(title='钱海信用卡充值')
     def test_01(self):
 
         # 点击季套餐
@@ -139,7 +138,8 @@ class TestEnPay(unittest.TestCase):
         sleep(2)
 
         # 获取支付价格
-        price = self.driver.find_element_by_xpath('//*[@id="wrapper"]/div[3]/div/div[2]/div/div[1]/div/div[3]/span[2]/span[2]')
+        price = self.driver.find_element_by_xpath('//*[@id="wrapper"]/div[3]/div/div[2]/div/div[1]/'
+                                                  'div/div[3]/span[2]/span[2]')
         print(price.text)
 
         sleep(1)
@@ -187,22 +187,21 @@ class TestEnPay(unittest.TestCase):
         # 点击提交按钮
         self.driver.find_element_by_id('start-show-pay-box').click()
 
-
         # 充值过的用户有警告框提示
         try:
             alert = self.driver.switch_to.alert
             alert.accept()
             sleep(1)
 
-        except:
+        except AssertionError:
             print('无需操作')
 
         finally:
 
             sleep(3)
 
-            # 切换iframe
-            frame = self.driver.find_element_by_id('ifrm_creditcard_checkout')
+            # 切换frame
+            frame = self.driver.find_element_by_xpath('//*[@id="ifrm_creditcard_checkout"]')
 
             self.driver.switch_to.frame(frame)
 
@@ -218,19 +217,23 @@ class TestEnPay(unittest.TestCase):
             sleep(3)
 
             try:
-
                 # 点击付款按钮
-                self.driver.find_element_by_xpath('//*[@id="wrap_height"]/div/div[3]/div/div[4]/button[1]').click()
-
+                self.driver.find_element_by_xpath('//*[@name="button" and @type="submit"]').click()
                 sleep(3)
+
                 print('钱海信用卡充值：3个月')
+                sleep(2)
+                self.driver.switch_to.parent_frame()
 
             except:
-                print('点击buy now出现异常，但流程依然正常完成')
-                print('钱海信用卡充值季套餐成功')
+                print('钱海充值异常')
+
+            finally:
+                print('继续执行')
 
     # 三方支付充值年套餐
     @pytest.mark.run(order=1)
+    @allure.step(title='本地充值')
     def test_02(self):
         sleep(1)
 
@@ -278,8 +281,15 @@ class TestEnPay(unittest.TestCase):
 
         # 点击三方弹窗BUY按钮
         self.driver.find_element_by_id('ps_psb').click()
+        sleep(10)
 
-        sleep(15)
+        # 充值成功有提示文案
+        payment_success = self.driver.find_element_by_xpath('//*[@id="ps_content"]/h3')
+
+        # 打印文案
+        print(payment_success.text)
+
+        sleep(2)
 
         # 关闭当前三方支付弹窗
         self.driver.close()
@@ -294,6 +304,7 @@ class TestEnPay(unittest.TestCase):
 
     # paypal支付,充值6个月套餐
     @pytest.mark.run(order=2)
+    @allure.step(title= 'paypal充值')
     def test_03(self):
         # 点击6个月套餐
         self.driver.find_element_by_xpath('//*[@id="wrapper"]/div[4]/div[2]/div[3]/article/div[2]/div[2]/a').click()
@@ -355,8 +366,8 @@ class TestEnPay(unittest.TestCase):
             self.driver.find_element_by_xpath('//*[@id="password"]').send_keys('11111111')
             sleep(1)
 
+        except AssertionError:
 
-        except:
             print('未出现paypal登录提示，照常进行')
             # # 第二次切换iframe
             # iframe_2 = self.driver.find_element_by_name('injectedUl')
@@ -378,6 +389,11 @@ class TestEnPay(unittest.TestCase):
             self.driver.find_element_by_xpath('//*[@id="btnLogin"]').click()
             sleep(3)
 
+            # 默认paypal
+            self.driver.find_element_by_xpath('//*[@id="xoSelectFi"]/div[1]/div[1]/div[2]/div/div[1]/div/ul/li[1]'
+                                              '/experience[2]/div/div/ng-transclude/div[1]/label').click()
+            sleep(2)
+
             # 点击继续
             self.driver.find_element_by_xpath('//*[@id="button"]/button').click()
 
@@ -396,10 +412,9 @@ class TestEnPay(unittest.TestCase):
 
             print('paypal充值：6个月')
 
-
     # paypal信用卡支付---终身
     @pytest.mark.run(order=3)
-    # @pytest.mark.flaky(reruns=2, reruns_delay=3)
+    @allure.step(title='paypal信用卡充值')
     def test_04(self):
         # 点击终身套餐
         self.driver.find_element_by_xpath('//*[@id="wrapper"]/div[4]/div[2]/div[2]/div/div[2]/a').click()
@@ -419,7 +434,7 @@ class TestEnPay(unittest.TestCase):
 
         sleep(3)
 
-        # 切换iframe
+        # 切换frame
         frame = self.driver.find_element_by_tag_name('iframe')
 
         self.driver.switch_to.frame(frame)
@@ -472,8 +487,6 @@ class TestEnPay(unittest.TestCase):
             sleep(6)
 
             select_1.select_by_visible_text('United States')  # 重新选择国家
-
-
 
         sleep(5)
 
@@ -532,7 +545,6 @@ class TestEnPay(unittest.TestCase):
 
         sleep(17)
 
-
         # 切换到第2个窗口
         f = self.driver.window_handles
 
@@ -584,9 +596,7 @@ class TestEnPay(unittest.TestCase):
 
         self.driver.quit()
 
-if __name__ == '__main__':
 
-    pytest.main(['-s','test_en_pay.py'])
 
 
 

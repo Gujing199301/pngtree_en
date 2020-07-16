@@ -313,7 +313,5 @@ class TestEnLogin(unittest.TestCase):
         self.driver.quit()
 
 
-if __name__ == "__main__":
-    pytest.main(['-s','test_th_login.py'])
 
 
