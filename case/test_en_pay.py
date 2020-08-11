@@ -201,9 +201,9 @@ class TestEnPay(unittest.TestCase):
             sleep(3)
 
             # 切换frame
-            frame = self.driver.find_element_by_xpath('//*[@id="ifrm_creditcard_checkout"]')
+            frame_1 = self.driver.find_element_by_id('ifrm_creditcard_checkout')
 
-            self.driver.switch_to.frame(frame)
+            self.driver.switch_to.frame(frame_1)
 
             sleep(3)
 
@@ -216,21 +216,14 @@ class TestEnPay(unittest.TestCase):
 
             sleep(3)
 
-            try:
-                # 点击付款按钮
-                self.driver.find_element_by_xpath('//*[@name="button" and @type="submit"]').click()
-                sleep(3)
+            # 点击pay now按钮
 
-                print('钱海信用卡充值：3个月')
-                sleep(2)
-                self.driver.switch_to.parent_frame()
+            self.driver.find_element_by_xpath('//*[@id="wrap_height"]/div/div[3]/div/div[4]/button[1]').click()
 
-            except AssertionError:
-                print('钱海充值异常')
+            sleep(10)
 
-            finally:
-                print('继续执行')
-
+            self.driver.switch_to.window(f[1])
+            sleep(2)
 
     # 三方支付充值年套餐
     @pytest.mark.run(order=1)
@@ -473,10 +466,11 @@ class TestEnPay(unittest.TestCase):
 
         # 实例化下拉框，传参
         select_1 = Select(element_select_1)
-        sleep(1)
+        sleep(2)
 
         # 获取下拉框的文本内容:获得的是字符串
         texts = element_select_1.text
+
         sleep(2)
 
         if '美国' in texts:
@@ -484,18 +478,18 @@ class TestEnPay(unittest.TestCase):
             # 文本定位法，选择United States
             select_1.select_by_visible_text('美国')  # 如果默认中国，选择美国
 
-        elif 'United States' in texts:
-            select_1.select_by_visible_text('United States')
+        # elif 'United States' in texts:
+        #     select_1.select_by_visible_text('United States') # 也可能是英文，包含United States
 
         else:
 
-            select_1.select_by_index(0)  # 选第一个
+            select_1.select_by_index(0)  # 还肯默认繁体中文香港地区，没有美国，全选第一个
 
             sleep(6)
 
-            if 'United States' in texts:
+            # if 'United States' in texts:
 
-                select_1.select_by_visible_text('United States')  # 重新选择国家
+            select_1.select_by_visible_text('United States')  # 重新选择美国
 
         sleep(5)
 
