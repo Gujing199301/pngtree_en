@@ -20,6 +20,17 @@ class TestLogin:
         self.page_obj = Page(self.driver)
         sleep(2)
 
+        try:
+            # 如果能定位到pv验证
+            self.driver.find_element_by_xpath(
+                '//*[@id="base-loading-box"]/div/div/div/div[3]')
+
+            self.driver.refresh()
+            # 多刷几次pv
+            self.page_obj.get_test_page().flush_pv()
+        except:
+            print("打开页面未出现PV验证")
+
     def setup(self):
 
         try:
@@ -56,6 +67,7 @@ class TestLogin:
         self.page_obj.get_login_page().fb_login('2505312014@qq.com','pngtree2020')
 
     def test_twitter_login(self):
+        # twitter登录
         self.page_obj.get_login_page().twitter_login('1280365716@qq.com','gujing199301')
 
 
