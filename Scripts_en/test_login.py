@@ -1,7 +1,4 @@
 import os,sys
-
-from selenium import webdriver
-
 sys.path.append(os.getcwd())
 from Base_en.page import Page
 from Base_en.initdriver import get_driver
@@ -9,22 +6,12 @@ from time import sleep
 import pytest
 
 
-
 class TestLogin:
 
     def setup_class(self):
 
-        chromeOptions = webdriver.ChromeOptions()
-
-        # 设置代理
-        chromeOptions.add_argument("--proxy-server=http://127.0.0.1:1080")
-        # 一定要注意，=两边不能有空格，不能是这样--proxy-server = http://202.20.16.82:10152
-        self.driver = webdriver.Chrome(chrome_options=chromeOptions)
-
-        
-        #
-        # # 引入driver
-        # self.driver = get_driver()
+        # 引入driver
+        self.driver = get_driver()
         sleep(1)
         self.driver.get('https://pngtree.com/')
         # 窗口最大化
@@ -74,4 +61,3 @@ class TestLogin:
 
 if __name__ == '__main__':
     pytest.main(['-s','-q','test_login.py'])
-
