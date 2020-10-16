@@ -7,7 +7,7 @@ class PremiumPage(Base):
     def __init__(self,driver):
         Base.__init__(self,driver)
 
-    def click_login(self):
+    def click_login_premium(self):
         self.click_element(Page_en.premium_login_xpath)
 
     def click_3_months(self):
