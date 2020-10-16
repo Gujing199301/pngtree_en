@@ -17,7 +17,7 @@ class TestPay:
         sleep(3)
 
         # 在会员页登录
-        self.page_obj.get_premium_page().click_login()
+        self.page_obj.get_premium_page().click_login_premium()
         sleep(2)
         self.page_obj.get_login_page().email_login('gujing199301@163.com', '1165509917@qq.com')
         sleep(2)
