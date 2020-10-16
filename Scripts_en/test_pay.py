@@ -10,6 +10,7 @@ class TestPay:
 
     def setup(self):
         self.driver = get_driver()
+        sleep(3)
         self.driver.get('https://pngtree.com/pay?b=1')
         self.driver.maximize_window()
         self.page_obj = Page(self.driver)
