@@ -71,31 +71,31 @@ class TestPay:
         # 使用钱海充值季套餐
         self.page_obj.get_pay_page().card_pay()
 
-    def test_paypal(self):
-
-        # 在会员页点击6个月套餐
-        self.page_obj.get_premium_page().click_6_months()
-        sleep(1)
-
-        # 使用paypal充值6个月套餐
-        self.page_obj.get_pay_page().paypal_pay()
-
-    def test_pw(self):
-        # 在会员页点击终身套餐
-        self.page_obj.get_premium_page().click_lifetime()
-        sleep(1)
-
-        # 选择本地方式充值终身套餐
-        self.page_obj.get_pay_page().pw_pay()
-
-    def test_palpal_card(self):
-        # 在会员页点击1年套餐
-        self.page_obj.get_premium_page().click_annual()
-        sleep(1)
-
-        # 使用paypal信用卡充值1年套餐
-        self.page_obj.get_pay_page().paypal_card_pay()
-
+    # def test_paypal(self):
+    #
+    #     # 在会员页点击6个月套餐
+    #     self.page_obj.get_premium_page().click_6_months()
+    #     sleep(1)
+    #
+    #     # 使用paypal充值6个月套餐
+    #     self.page_obj.get_pay_page().paypal_pay()
+    #
+    # def test_pw(self):
+    #     # 在会员页点击终身套餐
+    #     self.page_obj.get_premium_page().click_lifetime()
+    #     sleep(1)
+    #
+    #     # 选择本地方式充值终身套餐
+    #     self.page_obj.get_pay_page().pw_pay()
+    #
+    # def test_palpal_card(self):
+    #     # 在会员页点击1年套餐
+    #     self.page_obj.get_premium_page().click_annual()
+    #     sleep(1)
+    #
+    #     # 使用paypal信用卡充值1年套餐
+    #     self.page_obj.get_pay_page().paypal_card_pay()
+    #
 
 
 
