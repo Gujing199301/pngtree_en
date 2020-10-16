@@ -14,7 +14,7 @@ class TestPay:
         self.driver.get('https://pngtree.com/pay?b=1')
         self.driver.maximize_window()
         self.page_obj = Page(self.driver)
-        sleep(10)
+        sleep(3)
 
         # 在会员页登录
         self.page_obj.get_premium_page().click_login_premium()
