@@ -8,6 +8,7 @@ class PremiumPage(Base):
         Base.__init__(self,driver)
 
     def click_login_premium(self):
+        # 点击会员页登录按钮
         self.click_element(Page_en.premium_login_xpath)
 
     def click_3_months(self):
